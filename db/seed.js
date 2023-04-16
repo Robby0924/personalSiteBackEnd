@@ -83,7 +83,7 @@ async function createInitialUser() {
       password: "admin",
       email: "robbybacus@gmail.com",
     });
-    console.log(robby, "this is robby");
+    // console.log(robby, "this is robby");
 
     console.log("Finished creating building users");
   } catch (error) {
@@ -225,19 +225,18 @@ async function testDB() {
     //   email: "jessicajung@gmail.com",
     // });
     // console.log(updatedUser, "this is updateUser");
-
+    //----------------------------------------------------------------
     // console.log("Calling getUserById");
     // const user = await getUserById(1);
     // console.log(user, "this is getUserById");
-
+    //----------------------------------------------------------------
     // console.log("Calling getUser");
     // const user1 = await getUser({
     //   email: "robbybacus@gmail.com",
     //   password: "admin",
     // });
     // console.log(user1, "this is getUser");
-
-
+    //----------------------------------------------------------------
 
     //BUILDING IMAGE TESTS---------------------------------------------------
     // console.log("Calling deleteBuildingImage");
@@ -247,8 +246,6 @@ async function testDB() {
     //   deletedBuildingImage
     // );
 
-
-    
     //BUILDING_COMPILATION TESTS---------------------------------------------------
     // console.log("Calling getBuildingCompilationById");
     // const montage1 = await getBuildingCompilationById(1);

@@ -5,8 +5,8 @@ const { JWT_SECRET } = process.env;
 const { getUserById } = require("../db");
 
 //AUTHENTICATION------------------------------------------------------
-apiRouter.use(async (req, res, net) => {
-  const prefix = "Bearer";
+apiRouter.use(async (req, res, next) => {
+  const prefix = "Bearer ";
   const auth = req.header("Authorization");
 
   if (!auth) {

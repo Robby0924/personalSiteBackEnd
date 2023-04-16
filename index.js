@@ -19,7 +19,7 @@ server.use((req, res, next) => {
 });
 
 const apiRouter = require("./api");
-server.use("./api", apiRouter);
+server.use("/api", apiRouter);
 
 server.listen(PORT, () => {
   console.log("This server is up on port", PORT);

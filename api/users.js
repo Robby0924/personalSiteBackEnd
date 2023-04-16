@@ -3,8 +3,17 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 const { requireUser } = require("./utils");
-const { createUser, getUserById, updateUser, getUser } = require("../db");
+const {
+  createUser,
+  getUserById,
+  updateUser,
+  getUserByEmail,
+  getUser,
+} = require("../db");
 
+//-------------------NOT WORKING YET------------------------
+
+//POST /api/users/login-----------------------------------------------------
 usersRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -13,7 +22,7 @@ usersRouter.post("/login", async (req, res, next) => {
       res.status(400);
       return next({
         name: "MissingCredentialsError",
-        message: "Supply both an email and password.",
+        message: "Please supply both an email and password.",
         error: "MissingCredentialsError",
       });
     }
@@ -38,3 +47,67 @@ usersRouter.post("/login", async (req, res, next) => {
     throw error;
   }
 });
+
+
+//POST /api/users/register-----------------------------------------------------
+usersRouter.post("/register", async (req, res, next) => {
+  const { first_name, last_name, password, email } = req.body;
+
+  try {
+    const existingUser = await getUserByEmail(email);
+
+    if (existingUser) {
+      res.status(409);
+      return next({
+        name: "UserExistsError",
+        message: `User with email ${email} is already taken.`,
+        error: "UserExistsError",
+      });
+    }
+    if (password.length < 8) {
+      res.status(400);
+      return next({
+        name: "PasswordError",
+        message: "Password must be 8 characters or more.",
+        error: "PasswordError",
+      });
+    }
+
+    const user = await createUser({
+      first_name,
+      last_name,
+      password,
+      email,
+    });
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email,
+      },
+      JWT_SECRET,
+      { expiresIn: "1w" }
+    );
+
+    const _user = await getUserByEmail(email);
+
+    if (_user) {
+      res.send({
+        message: `Hey ${_user.first_name}! Thanks for signing up!`,
+        token,
+        user,
+      });
+    } else {
+      res.status(400);
+      return next({
+        name: "UserRegisterError",
+        message: "Registration failed.",
+        error: "UserRegisterError",
+      });
+    }
+  } catch (error) {
+    throw error;
+  }
+});
+
+module.exports = usersRouter;
