@@ -88,7 +88,9 @@ async function getBuildingByBuildingId(buildingId) {
       rows: [building],
     } = await client.query(`
     SELECT *
-    FROM building`);
+    FROM building
+    WHERE id=$1
+    `, [buildingId]);
     return building;
   } catch (error) {
     throw error;

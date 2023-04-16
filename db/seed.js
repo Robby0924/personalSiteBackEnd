@@ -1,8 +1,12 @@
 const client = require("./client");
 
 const {
+  //USER FUNCTIONS----------
   createUser,
+  getUser,
+  getUserById,
   updateUser,
+
   createBuilding,
   createBuildingImage,
   deleteBuildingImage,
@@ -213,7 +217,7 @@ async function testDB() {
   try {
     console.log("Executing testDB");
 
-    //USER TESTS---------------------------------------------------
+    //WORKING USER TESTS---------------------------------------------------
     // console.log("Calling updateUser");
     // const updatedUser = await updateUser(1, {
     //   first_name: "Jessica",
@@ -221,6 +225,19 @@ async function testDB() {
     //   email: "jessicajung@gmail.com",
     // });
     // console.log(updatedUser, "this is updateUser");
+
+    // console.log("Calling getUserById");
+    // const user = await getUserById(1);
+    // console.log(user, "this is getUserById");
+
+    // console.log("Calling getUser");
+    // const user1 = await getUser({
+    //   email: "robbybacus@gmail.com",
+    //   password: "admin",
+    // });
+    // console.log(user1, "this is getUser");
+
+
 
     //BUILDING IMAGE TESTS---------------------------------------------------
     // console.log("Calling deleteBuildingImage");
@@ -230,18 +247,20 @@ async function testDB() {
     //   deletedBuildingImage
     // );
 
+
+    
     //BUILDING_COMPILATION TESTS---------------------------------------------------
-    console.log("Calling getBuildingCompilationById");
-    const montage1 = await getBuildingCompilationById(1);
-    console.log(montage1, "this is getBuildingCompilationById");
+    // console.log("Calling getBuildingCompilationById");
+    // const montage1 = await getBuildingCompilationById(1);
+    // console.log(montage1, "this is getBuildingCompilationById");
 
-    console.log("Calling getAllBuildings");
-    const allBuildings = await getAllBuildings();
-    console.log(allBuildings, "this is getAllBuildings");
+    // console.log("Calling getAllBuildings");
+    // const allBuildings = await getAllBuildings();
+    // console.log(allBuildings, "this is getAllBuildings");
 
-    console.log("Calling getBuildingByBuildingId");
-    const montage = await getBuildingByBuildingId(1);
-    console.log(montage, "this is getBuildingByBuildingId");
+    // console.log("Calling getBuildingByBuildingId");
+    // const montage = await getBuildingByBuildingId(3);
+    // console.log(montage, "this is getBuildingByBuildingId");
 
     console.log("Completed testDB");
   } catch (error) {
