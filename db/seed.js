@@ -1,6 +1,10 @@
 const client = require("./client");
 
-const { createBuilding, createBuildingImage } = require("./index");
+const {
+  createBuilding,
+  createBuildingImage,
+  deleteBuildingImage,
+} = require("./index");
 
 async function dropTables() {
   try {
@@ -93,6 +97,13 @@ async function createInitialBuildingImage() {
     });
     // console.log(montage_image, "this is montage_image");
 
+    const astrip_image = await createBuildingImage({
+      image_url:
+        "https://scontent-atl3-2.xx.fbcdn.net/v/t1.6435-9/151326381_231514668647572_4041781631446339514_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=730e14&_nc_ohc=K9gVAUcaRjUAX9E2R8o&_nc_ht=scontent-atl3-2.xx&oh=00_AfA1Tw4haJTYu8cMlbiMfqSlebSXLMcwMAYyJGwZUjj-5w&oe=646072BC",
+      description: "AStrip post construction. Ready for lease!",
+    });
+      console.log(astrip_image, "this is astrip_image");
+
     console.log("Finished to creating building images");
   } catch (error) {
     console.error("Error creating building images...");
@@ -119,6 +130,16 @@ async function rebuildDB() {
 async function testDB() {
   try {
     console.log("Executing testDB");
+
+
+    //BUILDING IMAGE TESTS---------------------------------------------------
+    console.log("Calling deleteBuildingImage");
+    const deletedBuildingImage = await deleteBuildingImage(2);
+    console.log(
+      "Result deletedBuildingImage should be undefined",
+      deletedBuildingImage
+    );
+
     console.log("Completed testDB");
   } catch (error) {
     console.log("Error during testDB...");

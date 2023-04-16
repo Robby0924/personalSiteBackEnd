@@ -1,4 +1,5 @@
 module.exports = {
   ...require("./building"),
-  ...require("./building_image.js"),
+  ...require("./building_image"),
+  ...require("./building_compilation"),
 };
