@@ -1,3 +1,4 @@
 module.exports = {
-  ...require("./architecture"),
+  ...require("./building"),
+  ...require("./building_image.js"),
 };
