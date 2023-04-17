@@ -28,6 +28,7 @@ async function createBuilding({ building_name, description, role }) {
       `
         INSERT INTO building (building_name, description, role)
         VALUES($1, $2, $3)
+        ON CONFLICT (building_name) DO NOTHING
         RETURNING *;
         `,
       [building_name, description, role]
@@ -82,6 +83,24 @@ async function getBuildingByBuildingId(building_id) {
 
     const buildingInfo = await attachAllImagesToBuilding(rows);
     return buildingInfo;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getBuildingByName(building_name) {
+  try {
+    const {
+      rows: [building],
+    } = await client.query(
+      `
+    SELECT *
+    FROM building
+    WHERE building_name=$1
+    `,
+      [building_name]
+    );
+    return building;
   } catch (error) {
     throw error;
   }
@@ -151,5 +170,6 @@ module.exports = {
   deleteBuilding,
   getAllBuildings,
   getBuildingByBuildingId,
+  getBuildingByName,
   updateBuilding,
 };

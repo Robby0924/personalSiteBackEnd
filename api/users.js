@@ -11,8 +11,6 @@ const {
   getUser,
 } = require("../db");
 
-//-------------------NOT WORKING YET------------------------
-
 //POST /api/users/login-----------------------------------------------------
 usersRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;

@@ -14,6 +14,7 @@ const {
   deleteBuilding,
   getAllBuildings,
   getBuildingByBuildingId,
+  getBuildingByName,
   updateBuilding,
 
   //BUILDING IMAGE FUNCTIONS----------
@@ -67,7 +68,7 @@ async function createTables() {
 
         CREATE TABLE building (
             id SERIAL PRIMARY KEY,
-            building_name VARCHAR(255) NOT NULL,
+            building_name VARCHAR(255) UNIQUE NOT NULL,
             description VARCHAR(2000) NOT NULL,
             role VARCHAR(2000) NOT NULL
         );
@@ -295,6 +296,10 @@ async function testDB() {
     //     montage[0].building_image[1],
     //     "this is object 2 in building_image"
     //   );
+    //----------------------------------------------------------------
+    // console.log("Calling getBuildingByName");
+    // const buildingName = await getBuildingByName("Tambuli Seaside Resort and Spa");
+    // console.log(buildingName, "this is getBuildingByName");
     //----------------------------------------------------------------
     // console.log("Calling updateBuilding");
     // const updatedBuilding = await updateBuilding(3, {
