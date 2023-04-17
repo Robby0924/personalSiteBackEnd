@@ -56,6 +56,19 @@ async function deleteBuilding(building_id) {
   }
 }
 
+async function getAllBuildings() {
+  try {
+    const { rows } = await client.query(`
+  SELECT *
+  FROM building
+  `);
+    const buildings = await attachAllImagesToBuilding(rows);
+    return buildings;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getBuildingByBuildingId(building_id) {
   try {
     const { rows } = await client.query(
@@ -102,22 +115,7 @@ async function updateBuilding(building_id, fields = {}) {
   }
 }
 
-//-----------------IN PROGRESS-----------------
-
-async function getAllBuildings() {
-  try {
-    const { rows } = await client.query(`
-  SELECT *
-  FROM building
-  `);
-    const buildings = await attachAllImagesToBuilding(rows);
-    return buildings;
-  } catch (error) {
-    throw error;
-  }
-}
-
-//-----------------QUESTIONABLE-----------------
+//-----------------I GUESS ITS'S WORKING?-----------------
 async function attachAllImagesToBuilding(buildings) {
   const buildingsToReturn = [...buildings];
   const binds = buildings.map((_, index) => `$${index + 1}`).join(", ");
@@ -151,9 +149,7 @@ module.exports = {
   addBuildingImageToBuilding,
   createBuilding,
   deleteBuilding,
-  updateBuilding,
-
-  //----NOT WORKING YET
   getAllBuildings,
   getBuildingByBuildingId,
+  updateBuilding,
 };

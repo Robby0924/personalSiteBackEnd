@@ -4,25 +4,29 @@ const {
   //USER FUNCTIONS----------
   createUser,
   getUser,
+  getUserByEmail,
   getUserById,
   updateUser,
 
   //BUILDING FUNCTIONS----------
-  createBuilding,
   addBuildingImageToBuilding,
-  getBuildingByBuildingId,
-  getAllBuildings,
+  createBuilding,
   deleteBuilding,
+  getAllBuildings,
+  getBuildingByBuildingId,
   updateBuilding,
 
   //BUILDING IMAGE FUNCTIONS----------
   createBuildingImage,
   deleteBuildingImage,
+  getAllBuildingImages,
+  getBuildingImageByBuildingImageId,
+  updateBuildingImage,
 
   //BUILDING_BUILDING IMAGE FUNCTIONS----------
-
-  delete_Bldg_BldgImg_ById,
+  get_All_Bldg_Bldg_Img,
   get_Bldg_BldgImg_ById,
+  delete_Bldg_BldgImg_ById,
 } = require("./index");
 
 async function dropTables() {
@@ -163,7 +167,7 @@ async function createInitialBuildingImage() {
         "https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/257544027_3075930169391413_8896689017364413642_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=42HOVe2ecz8AX8ad3cr&_nc_ht=scontent-atl3-1.xx&oh=00_AfDU6FF7dhOSivmK32oUwdLQloeRFk38z2oE0XHfYZ9k1A&oe=643E45EE",
       description: "Tambuli Tower B",
     });
-    //   console.log(astrip_image, "this is astrip_image");
+    //   console.log(tambuli_image, "this is tambuli_image");
     console.log("Finished creating building images");
   } catch (error) {
     console.error("Error creating building images...");
@@ -242,6 +246,22 @@ async function testDB() {
     console.log("Executing testDB");
 
     //WORKING USER TESTS---------------------------------------------------
+    //----------------------------------------------------------------
+    // console.log("Calling getUser");
+    // const user = await getUser({
+    //   email: "robbybacus@gmail.com",
+    //   password: "admin",
+    // });
+    // console.log(user, "this is getUser");
+    //----------------------------------------------------------------
+    // console.log("Calling getUserByEmail");
+    // const user1 = await getUserByEmail("robbybacus@gmail.com");
+    // console.log(user1, "this is getUserByEmail");
+    //----------------------------------------------------------------
+    // console.log("Calling getUserById");
+    // const user2 = await getUserById(1);
+    // console.log(user2, "this is getUserById");
+    //----------------------------------------------------------------
     // console.log("Calling updateUser");
     // const updatedUser = await updateUser(1, {
     //   first_name: "Jessica",
@@ -250,32 +270,19 @@ async function testDB() {
     // });
     // console.log(updatedUser, "this is updateUser");
     //----------------------------------------------------------------
-    // console.log("Calling getUserById");
-    // const user = await getUserById(1);
-    // console.log(user, "this is getUserById");
-    //----------------------------------------------------------------
-    // console.log("Calling getUser");
-    // const user1 = await getUser({
-    //   email: "robbybacus@gmail.com",
-    //   password: "admin",
-    // });
-    // console.log(user1, "this is getUser");
-    //----------------------------------------------------------------
-
-    //IN PROGRESS USER TESTS---------------------------------------------------
-    //----------------------------------------------------------------
 
     // WORKING BUILDING TESTS---------------------------------------------------
-    // console.log("Calling deleteBuilding");
-    // const deletedAstrip = await deleteBuilding(2);
-    // console.log(deletedAstrip, "Result deletedAstrip should be undefined");
     //----------------------------------------------------------------
-    // console.log("Calling updateBuilding");
-    // const updatedBuilding = await updateBuilding(3, {
-    //   building_name: "Tambuli Clubhouse",
-    //   description: "This clubhouse takes up more footprint than the towers",
-    // });
-    // console.log(updatedBuilding, "this is updatedBuilding");
+    // console.log("Calling deleteBuilding");
+    // await deleteBuilding(2);
+    // const deletedBuilding = await getAllBuildings();
+    // console.log(deletedBuilding, "Checking deleteBuilding function. Building 2 should be missing.");
+    //----------------------------------------------------------------
+    // console.log("Calling getAllBuildings");
+    // const allBuildings = await getAllBuildings();
+    // console.log(allBuildings, "this is getAllBuildings");
+    // const bldg = allBuildings[0];
+    // console.log(bldg, "this is bldg");
     //----------------------------------------------------------------
     // console.log("Calling getBuildingByBuildingId");
     // const montage = await getBuildingByBuildingId(1);
@@ -289,31 +296,57 @@ async function testDB() {
     //     "this is object 2 in building_image"
     //   );
     //----------------------------------------------------------------
+    // console.log("Calling updateBuilding");
+    // const updatedBuilding = await updateBuilding(3, {
+    //   building_name: "Tambuli Clubhouse",
+    //   description: "This clubhouse takes up more footprint than the towers",
+    // });
+    // console.log(updatedBuilding, "this is updatedBuilding");
+    //----------------------------------------------------------------
 
     //WORKING BUILDING IMAGE TESTS---------------------------------------------------
-
     //----------------------------------------------------------------
-
-    //IN PROGRESS BUILDING IMAGE TESTS---------------------------------------------------
-
     // console.log("Calling deleteBuildingImage");
-    // const deletedBuildingImage = await deleteBuildingImage(2);
+    // await deleteBuildingImage(2);
+    // const deletedBuildingImage = await getAllBuildingImages();
     // console.log(
-    //   "Result deletedBuildingImage should be undefined",
-    //   deletedBuildingImage
+    //   deletedBuildingImage,
+    //   "Checking deleteBuildingImage function. Building image 2 should be missing."
     // );
+    //----------------------------------------------------------------
+    // console.log("Calling getAllBuildingImages");
+    // const buildingImages = await getAllBuildingImages();
+    // console.log(buildingImages, "this is getAllBuildingImages")
+    //----------------------------------------------------------------
+    // console.log("Calling getBuildingImageByBuildingImageId");
+    // const buildingImage = await getBuildingImageByBuildingImageId(2);
+    // console.log(buildingImage, "this is getBuildingImageByBuildingImageId");
+    // ----------------------------------------------------------------
+    // console.log("Calling updateBuildingImage");
+    // const updatedBuildingImage = await updateBuildingImage(4, {
+    //     image_url: "this is another test URL",
+    //     description: "This does not have any images to display",
+    // });
+    // console.log(updatedBuildingImage, "this is updateBuildingImage");
+    //----------------------------------------------------------------
 
     //WORKING BUILDING_COMPILATION TESTS---------------------------------------------------
-
+    // console.log("Calling delete_Bldg_BldgImg_ById");
+    // await delete_Bldg_BldgImg_ById(1);
+    // const deleted_Bldg_BldgImg = await get_All_Bldg_Bldg_Img();
+    // console.log(
+    //   deleted_Bldg_BldgImg,
+    //   "Checking delete_Bldg_BldgImg_ById function. Bldg_BldgImg 1 should be missing."
+    // );
     //----------------------------------------------------------------
-    //IN PROGRESS BUILDING_COMPILATION TESTS---------------------------------------------------
-    // console.log("Calling getBuildingCompilationById");
-    // const montage1 = await getBuildingCompilationById(1);
-    // console.log(montage1, "this is getBuildingCompilationById");
-
-    console.log("Calling getAllBuildings");
-    const allBuildings = await getAllBuildings();
-    console.log(allBuildings, "this is getAllBuildings");
+    // console.log("Calling get_All_Bldg_Bldg_Img");
+    // const allBldgBldgImg = await get_All_Bldg_Bldg_Img(1);
+    // console.log(allBldgBldgImg, "this is get_All_Bldg_Bldg_Img")
+    //----------------------------------------------------------------
+    // console.log("Calling get_Bldg_BldgImg_ById");
+    // const bldgBldgImg = await get_Bldg_BldgImg_ById(1);
+    // console.log(bldgBldgImg, "this is get_Bldg_BldgImg_ById")
+    //----------------------------------------------------------------
 
     console.log("Completed testDB");
   } catch (error) {
