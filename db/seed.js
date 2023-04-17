@@ -7,18 +7,22 @@ const {
   getUserById,
   updateUser,
 
+  //BUILDING FUNCTIONS----------
   createBuilding,
+  addBuildingImageToBuilding,
+  getBuildingByBuildingId,
+  getAllBuildings,
+  deleteBuilding,
+  updateBuilding,
+
+  //BUILDING IMAGE FUNCTIONS----------
   createBuildingImage,
   deleteBuildingImage,
-  addBuildingImageToBuilding,
-  getBuildingCompilationById,
-  getAllBuildings,
-  getBuildingByBuildingId,
 
   //BUILDING_BUILDING IMAGE FUNCTIONS----------
 
-  deleteBldg_BldgImg_Id,
-  getBldg_BldgImg_Id,
+  delete_Bldg_BldgImg_ById,
+  get_Bldg_BldgImg_ById,
 } = require("./index");
 
 async function dropTables() {
@@ -154,6 +158,12 @@ async function createInitialBuildingImage() {
     });
     //   console.log(astrip_image, "this is astrip_image");
 
+    const tambuli_image = await createBuildingImage({
+      image_url:
+        "https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/257544027_3075930169391413_8896689017364413642_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=42HOVe2ecz8AX8ad3cr&_nc_ht=scontent-atl3-1.xx&oh=00_AfDU6FF7dhOSivmK32oUwdLQloeRFk38z2oE0XHfYZ9k1A&oe=643E45EE",
+      description: "Tambuli Tower B",
+    });
+    //   console.log(astrip_image, "this is astrip_image");
     console.log("Finished creating building images");
   } catch (error) {
     console.error("Error creating building images...");
@@ -165,32 +175,41 @@ async function createInitialBuildingImageToBuilding() {
   try {
     console.log("Starting to merge building image to building");
 
-    const montageImageToMontageBuilding = await addBuildingImageToBuilding({
+    const montageImgToBldg = await addBuildingImageToBuilding({
       building_id: 1,
       building_image_id: 1,
     });
     // console.log(
-    //   montageImageToMontageBuilding,
-    //   "this is montageImageToMontageBuilding"
+    //   montageImgToBldg,
+    //   "this is montageImgToBldg"
     // );
 
-    const montageImageToMontageBuilding_2 = await addBuildingImageToBuilding({
+    const montageImgToBldg_2 = await addBuildingImageToBuilding({
       building_id: 1,
       building_image_id: 2,
     });
     // console.log(
-    //   montageImageToMontageBuilding_2,
-    //   "this is montageImageToMontageBuilding_2"
+    //   montageImgToBldg_2,
+    //   "this is montageImgToBldg_2"
     // );
 
-    const astripImageToAstripBuilding = await addBuildingImageToBuilding({
+    const astripImgToAstripBldg = await addBuildingImageToBuilding({
       building_id: 2,
       building_image_id: 3,
     });
     // console.log(
-    //   montageImageToMontageBuilding_2,
-    //   "this is montageImageToMontageBuilding_2"
+    //   astripImgToAstripBldg,
+    //   "this is astripImgToAstripBldg"
     // );
+
+    const tambuliImgToTambuliBldg = await addBuildingImageToBuilding({
+      building_id: 3,
+      building_image_id: 4,
+    });
+    //   console.log(
+    //     tambuliImgToTambuliBldg,
+    //     "this is tambuliImgToTambuliBldg"
+    //   );
 
     console.log("Finished merging building image to building");
   } catch (error) {
@@ -243,7 +262,40 @@ async function testDB() {
     // console.log(user1, "this is getUser");
     //----------------------------------------------------------------
 
-    //BUILDING IMAGE TESTS---------------------------------------------------
+    //IN PROGRESS USER TESTS---------------------------------------------------
+    //----------------------------------------------------------------
+
+    // WORKING BUILDING TESTS---------------------------------------------------
+    // console.log("Calling deleteBuilding");
+    // const deletedAstrip = await deleteBuilding(2);
+    // console.log(deletedAstrip, "Result deletedAstrip should be undefined");
+    //----------------------------------------------------------------
+    // console.log("Calling updateBuilding");
+    // const updatedBuilding = await updateBuilding(3, {
+    //   building_name: "Tambuli Clubhouse",
+    //   description: "This clubhouse takes up more footprint than the towers",
+    // });
+    // console.log(updatedBuilding, "this is updatedBuilding");
+    //----------------------------------------------------------------
+    // console.log("Calling getBuildingByBuildingId");
+    // const montage = await getBuildingByBuildingId(1);
+    // console.log(montage, "this is getBuildingByBuildingId");
+    // console.log(
+    //   montage[0].building_image[0],
+    //   "this is object 1 in building_image"
+    // );
+    // console.log(
+    //     montage[0].building_image[1],
+    //     "this is object 2 in building_image"
+    //   );
+    //----------------------------------------------------------------
+
+    //WORKING BUILDING IMAGE TESTS---------------------------------------------------
+
+    //----------------------------------------------------------------
+
+    //IN PROGRESS BUILDING IMAGE TESTS---------------------------------------------------
+
     // console.log("Calling deleteBuildingImage");
     // const deletedBuildingImage = await deleteBuildingImage(2);
     // console.log(
@@ -251,18 +303,17 @@ async function testDB() {
     //   deletedBuildingImage
     // );
 
-    //BUILDING_COMPILATION TESTS---------------------------------------------------
+    //WORKING BUILDING_COMPILATION TESTS---------------------------------------------------
+
+    //----------------------------------------------------------------
+    //IN PROGRESS BUILDING_COMPILATION TESTS---------------------------------------------------
     // console.log("Calling getBuildingCompilationById");
     // const montage1 = await getBuildingCompilationById(1);
     // console.log(montage1, "this is getBuildingCompilationById");
 
-    // console.log("Calling getAllBuildings");
-    // const allBuildings = await getAllBuildings();
-    // console.log(allBuildings, "this is getAllBuildings");
-
-    // console.log("Calling getBuildingByBuildingId");
-    // const montage = await getBuildingByBuildingId(3);
-    // console.log(montage, "this is getBuildingByBuildingId");
+    console.log("Calling getAllBuildings");
+    const allBuildings = await getAllBuildings();
+    console.log(allBuildings, "this is getAllBuildings");
 
     console.log("Completed testDB");
   } catch (error) {

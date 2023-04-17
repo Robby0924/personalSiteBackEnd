@@ -1,5 +1,6 @@
 const express = require("express")
-const {} = reqiore("../db")
+const {} = require("../db")
 const buildingRouter = express.Router();
 const {requireUser} = require("./utils")
 
+module.exports = buildingRouter;

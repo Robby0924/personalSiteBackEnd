@@ -18,18 +18,18 @@ async function createBuildingImage({ image_url, description }) {
   }
 }
 
-async function deleteBuildingImage(buildingImageId) {
+async function deleteBuildingImage(buildingImage_Id) {
   try {
     await client.query(`
     DELETE
     FROM bldg_bldgImg
-    WHERE building_image_id=${buildingImageId}
+    WHERE building_image_id=${buildingImage_Id}
     RETURNING *`);
 
     await client.query(`
     DELETE
     FROM building_image
-    WHERE id=${buildingImageId}
+    WHERE id=${buildingImage_Id}
     RETURNING *`);
   } catch (error) {
     throw error;
