@@ -36,6 +36,9 @@ apiRouter.use(async (req, res, next) => {
 const usersRouter = require("./users");
 apiRouter.use("/users", usersRouter);
 
+const buildingRouter = require("./building");
+apiRouter.use("/building", buildingRouter);
+
 //ERROR HANDLING------------------------------------------------------
 apiRouter.use((error, req, res, next) => {
   res.send({

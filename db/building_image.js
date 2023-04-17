@@ -22,7 +22,7 @@ async function deleteBuildingImage(buildingImageId) {
   try {
     await client.query(`
     DELETE
-    FROM building_compilation
+    FROM bldg_bldgImg
     WHERE building_image_id=${buildingImageId}
     RETURNING *`);
 

@@ -14,13 +14,18 @@ const {
   getBuildingCompilationById,
   getAllBuildings,
   getBuildingByBuildingId,
+
+  //BUILDING_BUILDING IMAGE FUNCTIONS----------
+
+  deleteBldg_BldgImg_Id,
+  getBldg_BldgImg_Id,
 } = require("./index");
 
 async function dropTables() {
   try {
     console.log("Dropping all Tables");
     await client.query(`
-        DROP TABLE IF EXISTS building_compilation;
+        DROP TABLE IF EXISTS bldg_bldgImg;
         DROP TABLE IF EXISTS building;
         DROP TABLE IF EXISTS building_image;  
         DROP TABLE IF EXISTS users;   
@@ -59,7 +64,7 @@ async function createTables() {
             role VARCHAR(2000) NOT NULL
         );
 
-        CREATE TABLE building_compilation (
+        CREATE TABLE bldg_bldgImg (
             id SERIAL PRIMARY KEY,
             building_id INTEGER REFERENCES building(id) NOT NULL,
             building_image_id INTEGER REFERENCES building_image(id) NOT NULL,

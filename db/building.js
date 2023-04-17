@@ -7,7 +7,7 @@ async function addBuildingImageToBuilding({ building_id, building_image_id }) {
       rows: [singleImageToBuilding],
     } = await client.query(
       `
-    INSERT INTO building_compilation(building_id, building_image_id)
+    INSERT INTO bldg_bldgImg(building_id, building_image_id)
     VALUES ($1, $2)
     ON CONFLICT (building_id, building_image_id) DO NOTHING
     RETURNING *;
@@ -48,10 +48,10 @@ async function attachAllImagesToBuilding(buildings) {
   try {
     const { rows: building_image } = await client.query(
       `
-    SELECT building_image.*, building_compilation.id AS "buildingCompilationId", building_compilation.building_id
+    SELECT building_image.*, bldg_bldgImg.id AS "bldg_bldgImgId", bldg_bldgImg.building_id
     FROM building_image
-    JOIN building_compilation ON building_compilation.building_image_id = building_image.id
-    WHERE building_compilation.building_id IN (${binds});
+    JOIN bldg_bldgImg ON bldg_bldgImg.building_image_id = building_image.id
+    WHERE bldg_bldgImg.building_id IN (${binds});
     `,
       buildingIds
     );
@@ -73,7 +73,7 @@ async function getAllBuildings() {
   try {
     const { rows } = await client.query(`
   SELECT *
-  FROM building_compilation
+  FROM bldg_bldgImg
   `);
     const buildings = await attachAllImagesToBuilding(rows);
     return buildings;

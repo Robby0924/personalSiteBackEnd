@@ -3,18 +3,18 @@ const client = require("./client");
 
 
 //-----------------SHOULD BE GOOD-----------------
-async function getBuildingCompilationById(buildingCompilationId) {
+async function getBldg_BldgImg_Id(bldg_bldgImg_Id) {
   try {
     const {
-      rows: [building_compilation],
+      rows: [bldg_bldgImg],
     } = await client.query(
       `
         SELECT *
-        FROM building_compilation
+        FROM bldg_bldgImg
         WHERE id = $1`,
-      [buildingCompilationId]
+      [bldg_bldgImg_Id]
     );
-    return building_compilation;
+    return bldg_bldgImg;
   } catch (error) {
     throw error;
   }
@@ -22,25 +22,25 @@ async function getBuildingCompilationById(buildingCompilationId) {
 
 //-----------------NOT WORKING AS INTENDED-----------------
 
-async function deleteBuildingCompilation(buildingCompilationId) {
+async function deleteBldg_BldgImg_Id(bldg_bldgImg_Id) {
   try {
     const {
-      rows: [building_compilation],
+      rows: [bldg_bldgImg],
     } = await client.query(
       `
         DELETE
-        FROM building_compilation
+        FROM bldg_bldgImg
         WHERE id=$1
         RETURNING *`,
-      [buildingCompilationId]
+      [bldg_bldgImg_Id]
     );
-    return building_compilation;
+    return bldg_bldgImg;
   } catch (error) {
     throw error;
   }
 }
 
 module.exports = {
-  deleteBuildingCompilation,
-  getBuildingCompilationById,
+  deleteBldg_BldgImg_Id,
+  getBldg_BldgImg_Id,
 };
