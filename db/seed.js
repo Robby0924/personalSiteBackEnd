@@ -25,9 +25,10 @@ const {
   updateBuildingImage,
 
   //BUILDING_BUILDING IMAGE FUNCTIONS----------
+  delete_Bldg_BldgImg_ById,
   get_All_Bldg_Bldg_Img,
   get_Bldg_BldgImg_ById,
-  delete_Bldg_BldgImg_ById,
+  get_Bldg_BldgImg_By_BldgId,
 } = require("./index");
 
 async function dropTables() {
@@ -335,7 +336,7 @@ async function testDB() {
     // console.log(updatedBuildingImage, "this is updateBuildingImage");
     //----------------------------------------------------------------
 
-    //WORKING BUILDING_COMPILATION TESTS---------------------------------------------------
+    //WORKING BUILDING_BUILDING IMAGE TESTS---------------------------------------------------
     // console.log("Calling delete_Bldg_BldgImg_ById");
     // await delete_Bldg_BldgImg_ById(1);
     // const deleted_Bldg_BldgImg = await get_All_Bldg_Bldg_Img();
@@ -351,6 +352,10 @@ async function testDB() {
     // console.log("Calling get_Bldg_BldgImg_ById");
     // const bldgBldgImg = await get_Bldg_BldgImg_ById(1);
     // console.log(bldgBldgImg, "this is get_Bldg_BldgImg_ById")
+    //----------------------------------------------------------------
+    // console.log("Calling get_Bldg_BldgImg_By_BldgId");
+    // const bldg_bldgImg = await get_Bldg_BldgImg_By_BldgId(1);
+    // console.log(bldg_bldgImg, "this is get_Bldg_BldgImg_By_BldgId");
     //----------------------------------------------------------------
 
     console.log("Completed testDB");
